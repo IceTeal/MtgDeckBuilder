@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MtG Deck Builder</string>
+    <string name="search">Search Cards</string>
+    <string name="decks">View/Edit Decks</string>
+    <string name="life">Life Counter</string>
+    <string name="color_select">Colors:</string>
+    <string name="color_scheme">Color Scheme:</string>
+</resources>
