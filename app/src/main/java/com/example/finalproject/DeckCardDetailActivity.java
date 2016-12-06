@@ -11,10 +11,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +49,8 @@ public class DeckCardDetailActivity extends AppCompatActivity {
 
     private LinearLayout card_pnt;
 
+    private ImageView cardImage;
+
     private Button update;
     private Button remove;
 
@@ -72,6 +77,8 @@ public class DeckCardDetailActivity extends AppCompatActivity {
         card_power = (TextView) findViewById(R.id.card_power);
         card_toughness = (TextView) findViewById(R.id.card_toughness);
         card_loyalty = (TextView) findViewById(R.id.card_loyalty);
+
+        cardImage = (ImageView) findViewById(R.id.cardImage) ;
 
         card_pnt = (LinearLayout) findViewById(R.id.card_pnt);
 
@@ -226,6 +233,38 @@ public class DeckCardDetailActivity extends AppCompatActivity {
                     Log.i("INFO", "No Subtypes");
                 }
 
+
+                try {
+                    JSONArray editions = jsonCard.getJSONArray("editions");
+
+                    int maxMultiverseId = 0;
+                    int recentEditionIndex = 0;
+                    int compareId;
+
+                    JSONObject edition;
+
+                    for(int i=0; i<editions.length(); i++)
+                    {
+                        edition = editions.getJSONObject(i);
+
+                        compareId = edition.getInt("multiverse_id");
+
+                        if(compareId > maxMultiverseId) {
+                            maxMultiverseId = compareId;
+                            recentEditionIndex = i;
+                        }
+                    }
+                    String imageURL = editions.getJSONObject(recentEditionIndex).getString("image_url");
+
+                    Picasso.with(DeckCardDetailActivity.this)
+                            .load(imageURL)
+                            .into(cardImage);
+
+                    cardImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                } catch (JSONException e) {
+                    Log.i("INFO", "No image");
+                }
 
                 card_text.setText(text);
 

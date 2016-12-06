@@ -96,8 +96,10 @@ public class CardDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int qty = Integer.parseInt(dropdown.getSelectedItem().toString());
                 db.createCardDeck((long) deckId, cardId, qty);
+
                 Intent intent = new Intent(CardDetailsActivity.this, DeckListActivity.class);
                 intent.putExtra("id", deckId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }

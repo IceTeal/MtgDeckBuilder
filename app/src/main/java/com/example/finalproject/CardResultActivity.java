@@ -192,7 +192,7 @@ public class CardResultActivity extends AppCompatActivity{
                     }
                     bufferedReader.close();
 
-                    URL nextUrl = new URL(API_URL + searchString + "&page=" + pageNumber + 1);
+                    URL nextUrl = new URL(API_URL + searchString + "&page=" + (pageNumber + 1));
                     HttpURLConnection nextUrlConnection = (HttpURLConnection) nextUrl.openConnection();
                     BufferedReader nextBufferedReader = new BufferedReader(new InputStreamReader(nextUrlConnection.getInputStream()));
 

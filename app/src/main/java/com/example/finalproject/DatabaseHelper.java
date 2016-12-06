@@ -177,6 +177,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DECKS, KEY_ID + " = ?",
                 new String[] { String.valueOf(deck_id) });
+
+        db.delete(TABLE_CARDDECKS, KEY_DECK_ID + " = ?",
+                new String[] {String.valueOf(deck_id)});
     }
 
     // ------------------------ "carddeck" table methods ----------------//
